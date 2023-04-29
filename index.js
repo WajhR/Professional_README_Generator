@@ -2,6 +2,7 @@
 
 const inquirer = require ('inquirer');
 const fs = require('fs');
+
 const generateMarkdown = require('./utils/generateMarkdown');
 console.log ('ReadMe Generator');
 
@@ -20,7 +21,7 @@ const questions = [{
 {
     type: 'input',
     name: 'installation',
-    message: 'How do you install the app?'
+    message: 'How do you install the app(ie...dependencies?'
 },
 {
     type: 'input',
@@ -35,7 +36,7 @@ const questions = [{
 {
     type: 'input',
     name: 'contributors',
-    message: 'who contributed in this app?'
+    message: 'Who contributed in this app?'
 },
 {
     type: 'list',
@@ -52,25 +53,30 @@ const questions = [{
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(data) {
-    fs.writeFileSync('./dest/READMe.md',data, function(err){
+// function writeToFile(data) {
+//     fs.writeFileSync('./dest/README.md',data) 
+// }
+function writeToFile(fileName, data){
+
+    fs.writeFile(fileName,data, function(err){
+        console.log(fileName)
         console.log(data)
         if (err) {
             return console.log(err)
-        } else {
-            console.log ("success")
+        }else {
+            console.log("success")
         }
-        
-    })
+    })   
+    
 }
-
 // TODO: Create a function to initialize app
 function init() {
     inquirer.prompt(questions)
     .then((answersObj) => {
-        writeToFile("README.md", generateMarkdown(answersObj));
+        
         console.log((answersObj));
-        console.log(generateMarkdown(answersObj))
+        console.log(generateMarkdown(answersObj));
+        writeToFile("README.md", generateMarkdown(answersObj));
 
       })
 }
