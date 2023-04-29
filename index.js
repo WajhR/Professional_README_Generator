@@ -1,9 +1,10 @@
 // TODO: Include packages needed for this application
 
 const inquirer = require ('inquirer');
-const generateMarkdown = require('./utils/generateMarkdown')
+const fs = require('fs');
+const generateMarkdown = require('./utils/generateMarkdown');
 console.log ('ReadMe Generator');
-const fs = require('fs')
+
 
 // TODO: Create an array of questions for user input
 const questions = [{
@@ -14,22 +15,22 @@ const questions = [{
 {
     type: 'input',
     name : 'description',
-    message: 'what is the project about?'
+    message: 'What is the project about?'
 },
 {
     type: 'input',
     name: 'installation',
-    message: 'How do you install it?'
+    message: 'How do you install the app?'
 },
 {
     type: 'input',
     name: 'test',
-    message: 'what command do I run to test the app?'
+    message: 'What command do I run to test the app?'
 },
 {
     type: 'input',
     name: 'usuage',
-    message: 'what is this app used for?'
+    message: 'How is the app used?'
 },
 {
     type: 'input',
@@ -41,21 +42,36 @@ const questions = [{
     name: 'license',
     message: 'Choose a license',
     choices: ['MIT','Apache','GPL','No license']
+},
+{
+    type: 'input',
+    name: 'questions',
+    message: 'Contact info for inquiries, Github username?'
 }
-
+    
 ];
 
 // TODO: Create a function to write README file
 function writeToFile(data) {
-    fs.writeFileSync(`./dest/ReadMe.md`,data)
+    fs.writeFileSync('./dest/READMe.md',data, function(err){
+        console.log(data)
+        if (err) {
+            return console.log(err)
+        } else {
+            console.log ("success")
+        }
+        
+    })
 }
 
 // TODO: Create a function to initialize app
 function init() {
-    inquirer.prompt(questions).then((answersObj) => {
+    inquirer.prompt(questions)
+    .then((answersObj) => {
+        writeToFile("README.md", generateMarkdown(answersObj));
         console.log((answersObj));
         console.log(generateMarkdown(answersObj))
-        writeToFile(generateMarkdown(answersObj))
+
       })
 }
 
