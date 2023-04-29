@@ -1,6 +1,6 @@
-# lkj
+# README.md Generator
   ## description
-  lksdgs
+  This app allows developers to create a professional README file with ease. 
   # Table of Contents
   1. [description](#description)
   2. [installation](#installation)
@@ -12,14 +12,14 @@
 
   
   ## installation
-  The following dependencies must be installed to run the application dlkghsldkhgs
+  The following dependencies must be installed to run the application inquirer, fs, util 
   ## test
-  ldshg;sdlhg
+  node index.js
   ## usuage
-  In order to use this app, lksdhg
+  In order to use this app, run in the terminal 
   ## contributors
-  lsdgh
+  n/a
   ## license
   MIT
   ##questions
-  
+  WajhR
